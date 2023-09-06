@@ -99,10 +99,10 @@ function createCard(cardData) {
 
 const productsCardContainer = document.querySelector('.products__card');
 
-cardItemsData.forEach((cardData) => {
-    const cardElement = createCard(cardData);
+for (let i = 0; i < cardItemsData.length; i++) {
+    const cardElement = createCard(cardItemsData[i]);
     productsCardContainer.appendChild(cardElement);
-});
+}
 
 //////////////////////////////Top Raiting List///////////////////////////
 // Sample data for top-rated products
@@ -114,7 +114,19 @@ const topRatedProductsData = [
         price: '$30',
     },
     {
-        imgSrc: './assets/images/home/toprating/Rectangle 26.png',
+        imgSrc: './assets/images/home/toprating/Rectangle 27.png',
+        title: 'Tray with Foot',
+        stars: 4,
+        price: '$30',
+    },
+    {
+        imgSrc: './assets/images/home/toprating/Rectangle 28.png',
+        title: 'Tray with Foot',
+        stars: 4,
+        price: '$30',
+    },
+    {
+        imgSrc: './assets/images/home/toprating/Rectangle 29.png',
         title: 'Tray with Foot',
         stars: 4,
         price: '$30',
@@ -126,37 +138,25 @@ const topRatedProductsData = [
         price: '$30',
     },
     {
-        imgSrc: './assets/images/home/toprating/Rectangle 26.png',
+        imgSrc: './assets/images/home/toprating/Rectangle 30.png',
         title: 'Tray with Foot',
         stars: 4,
         price: '$30',
     },
     {
-        imgSrc: './assets/images/home/toprating/Rectangle 26.png',
+        imgSrc: './assets/images/home/toprating/Rectangle 31.png',
         title: 'Tray with Foot',
         stars: 4,
         price: '$30',
     },
     {
-        imgSrc: './assets/images/home/toprating/Rectangle 26.png',
+        imgSrc: './assets/images/home/toprating/Rectangle 32.png',
         title: 'Tray with Foot',
         stars: 4,
         price: '$30',
     },
     {
-        imgSrc: './assets/images/home/toprating/Rectangle 26.png',
-        title: 'Tray with Foot',
-        stars: 4,
-        price: '$30',
-    },
-    {
-        imgSrc: './assets/images/home/toprating/Rectangle 26.png',
-        title: 'Tray with Foot',
-        stars: 4,
-        price: '$30',
-    },
-    {
-        imgSrc: './assets/images/home/toprating/Rectangle 26.png',
+        imgSrc: './assets/images/home/toprating/Rectangle 33.png',
         title: 'Tray with Foot',
         stars: 4,
         price: '$30',
@@ -191,9 +191,7 @@ function createTopRatedCard(productData) {
 
 const topRatedProductsContainer = document.querySelector('.top__rating__products');
 
-for (let i = 0; i < 9; i++) {
-    const randomProductIndex = Math.floor(Math.random() * topRatedProductsData.length);
-    const randomProductData = topRatedProductsData[randomProductIndex];
-    const topRatedCardElement = createTopRatedCard(randomProductData);
+for (let i = 0; i < topRatedProductsData.length; i++) {
+    const topRatedCardElement = createTopRatedCard(topRatedProductsData[i]);
     topRatedProductsContainer.appendChild(topRatedCardElement);
 }
