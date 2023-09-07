@@ -250,7 +250,7 @@ nav {
 .view__more__button {
     display: flex;
     justify-content: center;
-    margin-top: 60px;
+    margin: 60px 0px;
 }
 
 .view__more__button>button {

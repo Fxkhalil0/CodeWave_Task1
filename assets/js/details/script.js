@@ -23,59 +23,11 @@ const cardItemsData = [
         colors: ['#ACAD92', '#C4C4C4'],
         price: '58$',
     },
-    {
-        imgSrc: './assets/images/store/Rectangle 66.jpg',
-        title: 'Class Light Holder',
-        colors: ['#770505', '#EB5757'],
-        price: '40$',
-    },
-    {
-        imgSrc: './assets/images/store/Rectangle 67.png',
-        title: 'Flannel Duvet Cover Set',
-        colors: ['#C4C4C4'],
-        price: '120$',
-    },
-    {
-        imgSrc: './assets/images/store/Rectangle 70.png',
-        title: 'Fitted Cotton Sheet',
-        colors: ['#C4C4C4'],
-        price: '220$',
-    },
-    {
-        imgSrc: './assets/images/store/Rectangle 71.png',
-        title: 'Small Candle in a Small Jar',
-        colors: ['#770505', '#C4C4C4', '#EB5757'],
-        price: '90$',
-    },
-    {
-        imgSrc: './assets/images/store/Rectangle 72.png',
-        title: 'Checked Duvet Cover Set',
-        colors: ['#C4C4C4', '#6FCF97'],
-        price: '130$',
-    },
-    {
-        imgSrc: './assets/images/store/Rectangle 75.png',
-        title: 'Washed Linen Pillowcase',
-        colors: ['#C4C4C4'],
-        price: '220$',
-    },
-    {
-        imgSrc: './assets/images/store/Rectangle 76.png',
-        title: 'Small Candle in a Small Jar',
-        colors: ['#C4C4C4', '#DDC1B2'],
-        price: '90$',
-    },
-    {
-        imgSrc: './assets/images/store/Rectangle 77.png',
-        title: 'Mini Porcelain Dish',
-        colors: ['#C4C4C4', '#EB5757'],
-        price: '77$',
-    },
 ];
 
 function createCard(cardData) {
     const cardItem = document.createElement('div');
-    cardItem.classList.add('products__item');
+    cardItem.classList.add('products__item' , 'swiper-slide');
 
     const cardContent = `
         <figure>
@@ -88,7 +40,7 @@ function createCard(cardData) {
             </div>
             <div class="price__actions">
                 <p>${cardData.price}</p>
-                <div class="actions">
+                <div class="simillar__actions">
                     <button>ADD TO CART</button>
                     <i class="fa-regular fa-heart" style="color: #323334; font-size: 20px;"></i>
                 </div>
@@ -99,10 +51,41 @@ function createCard(cardData) {
     cardItem.innerHTML = cardContent;
     return cardItem;
 }
-
-const productsCardContainer = document.querySelector('.filtered__products');
+const productsCardContainer = document.querySelector('.similar__main');
 
 for (let i = 0; i < cardItemsData.length; i++) {
     const cardElement = createCard(cardItemsData[i]);
     productsCardContainer.appendChild(cardElement);
 }
+
+///////////////////////////// Slider ///////////////////////////////////
+var swiper = new Swiper(".slide-content", {
+    slidesPerView: 4,
+    // spaceBetween: 0,
+    loop: false,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+
+    breakpoints:{
+      1200:{
+
+        slidesPerView: 3,
+      },
+      992:{
+        slidesPerView: 2,
+      },
+      0:{
+        slidesPerView: 0,
+      },
+    },
+  });

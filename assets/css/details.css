@@ -229,18 +229,23 @@ span {
 .similar__products{
     margin: 100px 0;
 }
+.slide-container {
+    padding-bottom: 75px !important;
+}
+.swiper-button-next , .swiper-button-prev {
+    top: 40% !important;
+}
 .similar__products > h2{
     font-size: 24px;
     font-weight: lighter;
 }
 .similar__main{
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 35px;
 }
 .products__item {
-    width: 24%;
+    width: 24% !important;
 }
 
 .products__item>figure>img {

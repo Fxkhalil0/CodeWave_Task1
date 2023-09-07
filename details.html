@@ -11,6 +11,8 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--------Swiper CSS-------->
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <title>Details</title>
 </head>
 
@@ -77,10 +79,12 @@
                     <figure>
                         <img src="./assets/images/details/Rectangle 83.png" alt="">
                     </figure>
-                    <p>Not available in stores</p>
+                    <p><i class="fa-solid fa-location-dot"
+                            style="color: rgba(0, 0, 0, 0.5); font-size: 20px; margin-right: 5px;"></i> Not available in
+                        stores</p>
                     <div class="select">
                         <p>Select Size</p>
-                        <p>></p>
+                        <i class="fa-solid fa-chevron-down" style="color: #323334;"></i>
                     </div>
                     <div class="add__button">
                         <button>Add to shopping bag</button>
@@ -100,34 +104,22 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
         </div>
     </section>
     <!------------------------Similar Products-------------------->
     <section class="similar__products">
         <div class="container">
             <h2>Also You May Like</h2>
-            <div class="similar__main">
-                <div class="products__item">
-                    <figure>
-                        <img src="./assets/images/details/slider/Rectangle 67.png" alt="">
-                    </figure>
-                    <div class="card__content__text">
-                        <h3>Velvet Covvered</h3>
-                        <div class="product__colors">
-                            <p style="background-color: #770505;"></p>
-                            <p style="background-color: #0A5D8B;"></p>
-                        </div>
-                        <div class="price__actions">
-                            <p>30$</p>
-                            <div class="simillar__actions">
-                                <button>ADD TO CART</button>
-                                <p>@</p>
-                                <!-- <i class="fa-regular fa-heart" style="color: #323334; font-size: 20px;"></i> -->
-                            </div>
-                        </div>
+            <div class="slide-container swiper">
+                <div class="slide-content ">
+                    <div class="similar__main swiper-wrapper">
+
                     </div>
                 </div>
+                <div class="swiper-button-next swiper-navBtn"></div>
+                <div class="swiper-button-prev swiper-navBtn"></div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -191,5 +183,10 @@
         </div>
     </footer>
 </body>
+<!-- Swiper JS -->
+<script src="./assets/js/details/swiper-bundle.min.js"></script>
+
+<!--My JS File-->
+<script src="./assets/js/details/script.js"></script>
 
 </html>
