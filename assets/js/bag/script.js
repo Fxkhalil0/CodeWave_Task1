@@ -12,7 +12,7 @@ for (let i = 0; i < bagItem?.length; i++) {
     <div class="product__content">
         <div class="title__icon">
             <h3>${bagItem[i].title}</h3>
-            <i class="fa-solid fa-xmark" style="color: #323334; font-size: 20px;" onclick = "removeItem(${bagItem[i].id})"></i>
+            <i class="fa-solid fa-xmark" style="color: #323334; font-size: 20px; cursor: pointer;" onclick = "removeItem(${bagItem[i].id})"></i>
         </div>
         <h3>${bagItem[i].price}$</h3>
         <div class="product__desc">

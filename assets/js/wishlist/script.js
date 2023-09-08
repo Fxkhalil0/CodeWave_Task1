@@ -1,12 +1,3 @@
-//Display bag length on Navbar
-var bag = JSON.parse(localStorage.getItem("bag")) || [];
-var bagCount = document.getElementById('bagCount')
-bagCount.innerHTML = bag.length
-
-//Intialize the wishlist or put it as an empty array
-let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-
-
 //All Cards Data
 const cardItemsData = [
     {
@@ -95,37 +86,53 @@ const cardItemsData = [
     },
 ];
 
+var bag = JSON.parse(localStorage.getItem("bag")) || [];
+var bagCount = document.getElementById('bagCount')
+bagCount.innerHTML = bag.length
+
+
+//Intialize the wishlist or put it as an empty array
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
 //Created Card Dynamiclly
-function createCard(cardData) {
-    const cardItem = document.createElement('div');
-    cardItem.classList.add('products__item');
-
-    const isInBag = bag.some(item => item.id === cardData.id);
-
-    const cardContent = `
-        <figure>
-            <img src="${cardData.imgSrc}" alt="">
+var whishlistproducts = document.getElementById('whishlist__products')
+for (let i = 0; i < wishlist?.length; i++){
+    //Check if this item added to the bag or no
+const isInBag = bag.some(item => item.id === wishlist[i].id);
+    whishlistproducts.innerHTML += `
+    <div class="products__item">
+    <figure>
+            <img src="${wishlist[i].imgSrc}" alt="">
         </figure>
         <div class="card__content__text">
-            <h3>${cardData.title}</h3>
+            <h3>${wishlist[i].title}</h3>
             <div class="product__colors">
-                ${cardData.colors.map(color => `<p style="background-color: ${color};"></p>`).join('')}
+                ${wishlist[i].colors.map(color => `<p style="background-color: ${color};"></p>`).join('')}
             </div>
             <div class="price__actions">
-                <p>${cardData.price}$</p>
+                <p>${wishlist[i].price}$</p>
                 <div class="actions">
-                <button onclick="addToCart('${cardData.id}')">
+                <button onclick="addToCart('${wishlist[i].id}')">
                 ${isInBag ? "IN BAG" : "ADD TO CART"}
                 </button>
-                    <i id="heart-${cardData.id}" class="fa-regular fa-heart" style="color: #323334; font-size: 20px;" onclick="addToWishlist('${cardData.id}')"></i>
+                    <button onclick = "removeItem(${wishlist[i].id})">REMOVE</button>
                 </div>
             </div>
         </div>
-    `;
-
-    cardItem.innerHTML = cardContent;
-    return cardItem;
+    </div>
+    `
 }
+//Remove Item from WishList
+function removeItem(x) {
+    for (let i = 0; i < wishlist?.length; i++) {
+        if (wishlist[i].id == x) {
+            wishlist.splice(i, 1)
+        }
+    }
+    localStorage.setItem('wishlist', JSON.stringify(wishlist))
+    window.location.reload();
+}
+
 function addToCart(productId) {
     const isItemInBag = bag.some(item => item.id === productId);
 
@@ -143,37 +150,4 @@ function addToCart(productId) {
             alert("Product not found.");
         }
     }
-}
-function addToWishlist(productId) {
-    const isItemInWishlist = wishlist.some(item => item.id === productId);
-
-    if (isItemInWishlist) {
-        alert("This item is already in your wishlist");
-    } else {
-        const productToAdd = cardItemsData.find(product => product.id === productId);
-
-        if (productToAdd) {
-            wishlist.push(productToAdd);
-            localStorage.setItem("wishlist", JSON.stringify(wishlist));
-            alert("This item has been added to your wishlist");
-            updateHeartIcon(productId);
-        } else {
-            alert("Product not found.");
-        }
-    }
-}
-function updateHeartIcon(productId) {
-    const heartIcon = document.getElementById(`heart-${productId}`);
-    if (heartIcon) {
-        heartIcon.classList.remove("fa-regular");
-        heartIcon.classList.add("fa-solid");
-        heartIcon.style.color = "#DF1313";
-    }
-}
-
-const productsCardContainer = document.querySelector('.filtered__products');
-
-for (let i = 0; i < cardItemsData.length; i++) {
-    const cardElement = createCard(cardItemsData[i]);
-    productsCardContainer.appendChild(cardElement);
 }
