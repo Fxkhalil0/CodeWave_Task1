@@ -26,15 +26,16 @@
                     <div class="icons">
                         <i class="fa-solid fa-magnifying-glass" style="color: #323334; font-size: 20px;"></i>
                         <i class="fa-regular fa-user" style="color: #323334; font-size: 20px;"></i>
-                        <i class='bx bx-shopping-bag' style='color:#323334; font-size: 24px;'></i>
+                        <a href="./bag.html"><i class='bx bx-shopping-bag' style='color:#323334; font-size: 24px;'></i></a>
+                        <p id="bagCount">0</p>
                         <i class="fa-regular fa-heart" style="color: #323334; font-size: 20px;"></i>
                     </div>
                 </div>
             </div>
             <div class="sec__border__div">
                 <ul class="nav__links">
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">STORE</a>
+                    <li><a href="./index.html">HOME</a></li>
+                    <li><a href="./store.html">STORE</a>
                     </li>
                     <li><a href="#">ACCESSORIES</a></li>
                     <li><a href="#">BRAND</a></li>
@@ -53,14 +54,14 @@
                 <div class="left__side">
                     <div class="two__images">
                         <figure>
-                            <img src="./assets/images/details/Rectangle 83.png" alt="">
+                            <img src="./assets/images/details/Rectangle 83.png" alt="" id="first__img">
                         </figure>
                         <figure>
-                            <img src="./assets/images/details/Rectangle 82.png" alt="">
+                            <img src="./assets/images/details/Rectangle 82.png" alt="" id="sec__img">
                         </figure>
                     </div>
                     <figure>
-                        <img src="./assets/images/details/Rectangle 97.png" alt="">
+                        <img src="./assets/images/details/Rectangle 97.png" alt="" id="third__img">
                     </figure>
                     <div class="product__desc">
                         <div class="product__desc__text">
@@ -73,33 +74,33 @@
                     </div>
                 </div>
                 <div class="right__side">
-                    <h3>Checked Duvet Cover Set</h3>
-                    <h3>39.99$</h3>
-                    <p>Light khaki green/white checks</p>
+                    <h3 id="title">Checked Duvet Cover Set</h3>
+                    <h3 id="price">39.99$</h3>
+                    <p id="description">Light khaki green/white checks</p>
                     <figure>
-                        <img src="./assets/images/details/Rectangle 83.png" alt="">
+                        <img src="./assets/images/details/Rectangle 83.png" alt="" id="fourth__img">
                     </figure>
                     <p><i class="fa-solid fa-location-dot"
                             style="color: rgba(0, 0, 0, 0.5); font-size: 20px; margin-right: 5px;"></i> Not available in
                         stores</p>
-                    <div class="select">
-                        <p>Select Size</p>
-                        <i class="fa-solid fa-chevron-down" style="color: #323334;"></i>
+                    <div class="select" onclick="openMenu()">
+                        <p id="setSizeValue">Select Size</p>
+                        <i class="fa-solid fa-chevron-down" style="color: #323334; cursor: pointer;"></i>
                     </div>
                     <div class="add__button">
-                        <button>Add to shopping bag</button>
+                        <button onclick="addBag()">Add to shopping bag</button>
                     </div>
-                    <div class="size__list">
-                        <p>X</p>
+                    <div class="size__list" id="size__list">
+                        <i class="fa-solid fa-xmark" style="color: #323334; font-size: 20px; cursor: pointer;" onclick="closeMenu()"></i>
                         <ul>
-                            <li>S</li>
-                            <li>M</li>
-                            <li>L</li>
-                            <li>XL</li>
+                            <li onclick="size('S')">S</li>
+                            <li onclick="size('M')">M</li>
+                            <li onclick="size('L')">L</li>
+                            <li onclick="size('XL')">XL</li>
                         </ul>
                         <div class="actions">
-                            <button>CLEAR ALL</button>
-                            <button>DONE</button>
+                            <button onclick="clearSize()">CLEAR ALL</button>
+                            <button onclick="closeMenu()">DONE</button>
                         </div>
                     </div>
                 </div>

@@ -26,15 +26,16 @@
                     <div class="icons">
                         <i class="fa-solid fa-magnifying-glass" style="color: #323334; font-size: 20px;"></i>
                         <i class="fa-regular fa-user" style="color: #323334; font-size: 20px;"></i>
-                        <i class='bx bx-shopping-bag' style='color:#323334; font-size: 24px;'></i>
+                        <a href="./bag.html"><i class='bx bx-shopping-bag' style='color:#323334; font-size: 24px;'></i></a>
+                        <p id="bagCount">0</p>
                         <i class="fa-regular fa-heart" style="color: #323334; font-size: 20px;"></i>
                     </div>
                 </div>
             </div>
             <div class="sec__border__div">
                 <ul class="nav__links">
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">STORE</a>
+                    <li><a href="./index.html">HOME</a></li>
+                    <li><a href="./store.html">STORE</a>
                     </li>
                     <li><a href="#">ACCESSORIES</a></li>
                     <li><a href="#">BRAND</a></li>
@@ -51,64 +52,11 @@
         <div class="container">
             <h2>Shopping bag</h2>
             <div class="main__div">
-                <div class="left__side">
-                    <div class="product__item">
-                        <figure>
-                            <img src="./assets/images/bag/Rectangle 83.png" alt="">
-                        </figure>
-                        <div class="product__content">
-                            <div class="title__icon">
-                                <h3>Checked Duvet Cover Set</h3>
-                                <i class="fa-solid fa-xmark" style="color: #323334; font-size: 20px;"></i>
-                            </div>
-                            <h3>39.99$</h3>
-                            <div class="product__desc">
-                                <p>Art. No.: <span>54637253</span></p>
-                                <p>Size: <span>XL</span></p>
-                                <p>Color: <span>Mint</span></p>
-                                <p>Total: <span>39.99$</span></p>
-                            </div>
-                            <div class="fav__select">
-                                <i class="fa-regular fa-heart" style="color: #323334; font-size: 20px;"></i>
-                                <div class="select">
-                                    <p>Number Of Piece</p>
-                                    <i class="fa-solid fa-chevron-down" style="color: #323334;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product__item">
-                        <figure>
-                            <img src="./assets/images/bag/Rectangle 76.png" alt="">
-                        </figure>
-                        <div class="product__content">
-                            <div class="title__icon">
-                                <h3>Checked Duvet Cover Set</h3>
-                                <i class="fa-solid fa-xmark" style="color: #323334; font-size: 20px;"></i>
-                            </div>
-                            <h3>39.99$</h3>
-                            <div class="product__desc">
-                                <p>Art. No.: <span>54637253</span></p>
-                                <p>Size: <span>XL</span></p>
-                                <p>Color: <span>Mint</span></p>
-                                <p>Total: <span>39.99$</span></p>
-                            </div>
-                            <div class="fav__select">
-                                <i class="fa-regular fa-heart" style="color: #323334; font-size: 20px;"></i>
-                                <div class="select">
-                                    <p>Number Of Piece</p>
-                                    <i class="fa-solid fa-chevron-down" style="color: #323334;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="total__line">
-                        <p>Total</p>
-                        <p></p>
-                        <p>82.98$</p>
-                    </div>
+                <div class="left__side" id="left__side">
+                    
                 </div>
                 <div class="right__side">
+                    
                     <div class="right__content">
                         <p>ADD DISCOUNT CODE</p>
                         <div class="newsletter__input">
@@ -137,6 +85,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="total__line">
+                <p>Total</p>
+                <p></p>
+                <p id="total__price">82.98$</p>
             </div>
         </div>
     </section>

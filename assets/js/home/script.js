@@ -3,66 +3,74 @@
 
 const cardItemsData = [
     {
+        id: '1',
         imgSrc: './assets/images/home/products/Rectangle 5.png',
         title: 'LINEN BEACH TOWEL',
         stars: 4,
-        price: '30$',
+        price: 30,
         category: 'DECOR',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
+        id: '2',
         imgSrc: './assets/images/home/products/Rectangle 6.png',
         title: 'LINEN BEACH TOWEL',
         stars: 4,
-        price: '30$',
+        price: 30,
         category: 'DECOR',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
+        id: '3',
         imgSrc: './assets/images/home/products/Rectangle 7.png',
         title: 'LINEN BEACH TOWEL',
         stars: 4,
-        price: '30$',
+        price: 30,
         category: 'DECOR',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
+        id: '4',
         imgSrc: './assets/images/home/products/Rectangle 8.png',
         title: 'LINEN BEACH TOWEL',
         stars: 4,
-        price: '30$',
+        price: 30,
         category: 'DECOR',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
+        id: '5',
         imgSrc: './assets/images/home/products/Rectangle 9.png',
         title: 'LINEN BEACH TOWEL',
         stars: 4,
-        price: '30$',
+        price: 30,
         category: 'DECOR',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
+        id: '6',
         imgSrc: './assets/images/home/products/Rectangle 10.png',
         title: 'LINEN BEACH TOWEL',
         stars: 4,
-        price: '30$',
+        price: 30,
         category: 'DECOR',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
+        id: '7',
         imgSrc: './assets/images/home/products/Rectangle 11.png',
         title: 'LINEN BEACH TOWEL',
         stars: 4,
-        price: '30$',
+        price: 30,
         category: 'DECOR',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
+        id: '8',
         imgSrc: './assets/images/home/products/Rectangle 12.png',
         title: 'LINEN BEACH TOWEL',
         stars: 4,
-        price: '30$',
+        price: 30,
         category: 'DECOR',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
@@ -82,13 +90,13 @@ function createCard(cardData) {
                 ${Array(cardData.stars).fill('<i class="fa-regular fa-star" style="color: #F2C94C;"></i>').join('')}
                 ${Array(5 - cardData.stars).fill('<i class="fa-regular fa-star" style="color: #000000;"></i>').join('')}
             </div>
-            <p>${cardData.price}</p>
+            <p>${cardData.price}$</p>
         </div>
         <div class="hover__div">
             <div class="hover__text">
                 <h3>${cardData.category}</h3>
                 <p>${cardData.description}</p>
-                <button>VIEW ALL</button>
+                <button onclick= "navigate('${cardData.id}');">VIEW ALL</button>
             </div>
         </div>
     `;
@@ -103,6 +111,17 @@ for (let i = 0; i < cardItemsData.length; i++) {
     const cardElement = createCard(cardItemsData[i]);
     productsCardContainer.appendChild(cardElement);
 }
+
+function navigate (id){
+    const url = `details.html?id=${id}`;
+    
+    // Navigate to the description page
+    window.location.href = url;
+}
+
+var bag = JSON.parse(localStorage.getItem("bag"))
+var bagCount = document.getElementById('bagCount')
+bagCount.innerHTML = bag.length
 
 //////////////////////////////Top Raiting List///////////////////////////
 // Sample data for top-rated products

@@ -106,3 +106,7 @@ for (let i = 0; i < cardItemsData.length; i++) {
     const cardElement = createCard(cardItemsData[i]);
     productsCardContainer.appendChild(cardElement);
 }
+
+var bag = JSON.parse(localStorage.getItem("bag"))
+var bagCount = document.getElementById('bagCount')
+bagCount.innerHTML = bag.length
