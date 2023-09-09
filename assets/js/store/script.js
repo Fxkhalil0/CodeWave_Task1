@@ -135,7 +135,7 @@ function addToCart(productId) {
         const productToAdd = cardItemsData.find(product => product.id === productId);
 
         if (productToAdd) {
-            bag.push({...productToAdd , numOfPiece: 1 , size: "None"});
+            bag.push({ ...productToAdd, numOfPiece: 1, size: "None" });
             localStorage.setItem("bag", JSON.stringify(bag));
             alert("This item added successfully");
             window.location.reload();
@@ -168,6 +168,56 @@ function updateHeartIcon(productId) {
         heartIcon.classList.remove("fa-regular");
         heartIcon.classList.add("fa-solid");
         heartIcon.style.color = "#DF1313";
+    }
+}
+
+let priceProducts = []
+
+//filtering by color
+let filteredProducts = [];
+function filterByColor(color) {
+    // Filter products by color
+    filteredProducts = cardItemsData.filter(product => product.colors.includes(color));
+
+    // Clear the current products in the filtered__products container
+    productsCardContainer.innerHTML = '';
+
+    // Create and append the filtered products
+    for (let i = 0; i < filteredProducts.length; i++) {
+        const cardElement = createCard(filteredProducts[i]);
+        productsCardContainer.appendChild(cardElement);
+    }
+}
+
+//filtering by price
+let filteredProductsByPrice = [];
+function filterByPrice(priceRange) {
+    // Split the price range into minimum and maximum values
+    const [minPrice, maxPrice] = priceRange.split('-').map(parseFloat);
+    if (!priceProducts.includes(minPrice)) {
+        priceProducts.push(minPrice, maxPrice)
+    }
+    var min = 350;
+    var maX = 0;
+    console.log(priceProducts)
+    for (let i = 0; i < priceProducts.length; i++) {
+        if (min > priceProducts[i]) {
+            min = priceProducts[i]
+        }
+        if (maX < priceProducts[i]) {
+            maX = priceProducts[i]
+        }
+    }
+    console.log(min, maX)
+    filteredProductsByPrice = cardItemsData.filter(product => {
+        const productPrice = parseFloat(product.price);
+        return productPrice >= min && productPrice <= maX;
+    });
+    productsCardContainer.innerHTML = '';
+
+    for (let i = 0; i < filteredProductsByPrice.length; i++) {
+        const cardElement = createCard(filteredProductsByPrice[i]);
+        productsCardContainer.appendChild(cardElement);
     }
 }
 
