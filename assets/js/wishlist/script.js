@@ -88,7 +88,7 @@ const cardItemsData = [
 
 var bag = JSON.parse(localStorage.getItem("bag")) || [];
 var bagCount = document.getElementById('bagCount')
-bagCount.innerHTML = bag.length
+bagCount.innerHTML = bag?.length || 0
 
 
 //Intialize the wishlist or put it as an empty array

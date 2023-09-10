@@ -1,11 +1,10 @@
 //Display bag length on Navbar
 var bag = JSON.parse(localStorage.getItem("bag")) || [];
 var bagCount = document.getElementById('bagCount')
-bagCount.innerHTML = bag.length
+bagCount.innerHTML = bag?.length || 0
 
 //Intialize the wishlist or put it as an empty array
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-
 
 //All Cards Data
 const cardItemsData = [
@@ -117,7 +116,8 @@ function createCard(cardData) {
                 <button onclick="addToCart('${cardData.id}')">
                 ${isInBag ? "IN BAG" : "ADD TO CART"}
                 </button>
-                    <i id="heart-${cardData.id}" class="fa-regular fa-heart" style="color: #323334; font-size: 20px;" onclick="addToWishlist('${cardData.id}')"></i>
+                    <i id="heart-${cardData.id}" class="fa-regular fa-heart" style="color: #323334; font-size: 20px; cursor: pointer;"
+                    onclick="addToWishlist('${cardData.id}')"></i>
                 </div>
             </div>
         </div>
@@ -144,45 +144,60 @@ function addToCart(productId) {
         }
     }
 }
+//check if a product is in the wishlist
+function isInWishlist(productId) {
+    return wishlist.some(item => item.id === productId);
+}
+
+//update heart icons based on the wishlist state
+function updateHeartIcons() {
+    cardItemsData.forEach(product => {
+        const heartIcon = document.getElementById(`heart-${product.id}`);
+        if (heartIcon) {
+            if (isInWishlist(product.id)) {
+                //product is in the wishlist == heart icon red
+                heartIcon.classList.remove("fa-regular");
+                heartIcon.classList.add("fa-solid");
+                heartIcon.style.color = "#DF1313";
+            } else {
+                //product is not in the wishlist == regular heart icon
+                heartIcon.classList.remove("fa-solid");
+                heartIcon.classList.add("fa-regular");
+                heartIcon.style.color = "#323334";
+            }
+        }
+    });
+}
+// Function to add or remove items from the wishlist
 function addToWishlist(productId) {
-    const isItemInWishlist = wishlist.some(item => item.id === productId);
+    const isItemInWishlist = isInWishlist(productId);
 
     if (isItemInWishlist) {
-        alert("This item is already in your wishlist");
+        // Remove item from the wishlist
+        wishlist = wishlist.filter(item => item.id !== productId);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        updateHeartIcons(); // Update the heart icons after removing
+        alert("This item has been removed from your wishlist");
     } else {
         const productToAdd = cardItemsData.find(product => product.id === productId);
 
         if (productToAdd) {
             wishlist.push(productToAdd);
             localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            updateHeartIcons(); // Update the heart icons after adding
             alert("This item has been added to your wishlist");
-            updateHeartIcon(productId);
         } else {
             alert("Product not found.");
         }
     }
-}
-function updateHeartIcon(productId) {
-    const heartIcon = document.getElementById(`heart-${productId}`);
-    if (heartIcon) {
-        heartIcon.classList.remove("fa-regular");
-        heartIcon.classList.add("fa-solid");
-        heartIcon.style.color = "#DF1313";
-    }
-}
+    updateHeartIcons();
 
-let priceProducts = []
-
+}
 //filtering by color
 let filteredProducts = [];
 function filterByColor(color) {
-    // Filter products by color
     filteredProducts = cardItemsData.filter(product => product.colors.includes(color));
-
-    // Clear the current products in the filtered__products container
     productsCardContainer.innerHTML = '';
-
-    // Create and append the filtered products
     for (let i = 0; i < filteredProducts.length; i++) {
         const cardElement = createCard(filteredProducts[i]);
         productsCardContainer.appendChild(cardElement);
@@ -191,30 +206,27 @@ function filterByColor(color) {
 
 //filtering by price
 let filteredProductsByPrice = [];
+let selectedPriceRanges = [];
 function filterByPrice(priceRange) {
-    // Split the price range into minimum and maximum values
-    const [minPrice, maxPrice] = priceRange.split('-').map(parseFloat);
-    if (!priceProducts.includes(minPrice)) {
-        priceProducts.push(minPrice, maxPrice)
-    }
-    var min = 350;
-    var maX = 0;
-    console.log(priceProducts)
-    for (let i = 0; i < priceProducts.length; i++) {
-        if (min > priceProducts[i]) {
-            min = priceProducts[i]
-        }
-        if (maX < priceProducts[i]) {
-            maX = priceProducts[i]
-        }
-    }
-    console.log(min, maX)
-    filteredProductsByPrice = cardItemsData.filter(product => {
-        const productPrice = parseFloat(product.price);
-        return productPrice >= min && productPrice <= maX;
-    });
-    productsCardContainer.innerHTML = '';
+    const index = selectedPriceRanges.indexOf(priceRange);
 
+    if (index === -1) {
+        selectedPriceRanges.push(priceRange);
+    } else {
+        selectedPriceRanges.splice(index, 1);
+    }
+    if (selectedPriceRanges.length === 0) {
+        filteredProductsByPrice = cardItemsData;
+    } else {
+        filteredProductsByPrice = cardItemsData.filter(product => {
+            const productPrice = parseFloat(product.price);
+            return selectedPriceRanges.some(range => {
+                const [minPrice, maxPrice] = range.split('-').map(parseFloat);
+                return productPrice >= minPrice && productPrice <= maxPrice;
+            });
+        });
+    }
+    productsCardContainer.innerHTML = '';
     for (let i = 0; i < filteredProductsByPrice.length; i++) {
         const cardElement = createCard(filteredProductsByPrice[i]);
         productsCardContainer.appendChild(cardElement);
@@ -227,3 +239,5 @@ for (let i = 0; i < cardItemsData.length; i++) {
     const cardElement = createCard(cardItemsData[i]);
     productsCardContainer.appendChild(cardElement);
 }
+
+updateHeartIcons();

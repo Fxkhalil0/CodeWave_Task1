@@ -245,5 +245,5 @@ function navigate(id) {
 //To display the length of bag
 var bag = JSON.parse(localStorage.getItem("bag"))
 var bagCount = document.getElementById('bagCount')
-bagCount.innerHTML = bag.length
+bagCount.innerHTML = bag?.length || 0
 

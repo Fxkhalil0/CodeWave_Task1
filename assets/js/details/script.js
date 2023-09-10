@@ -163,7 +163,10 @@ const productsCardItemsData = [
 //Display bag length on Navbar
 var bag = JSON.parse(localStorage.getItem("bag"))
 var bagCount = document.getElementById('bagCount')
-bagCount.innerHTML = bag.length
+bagCount.innerHTML = bag?.length ||0
+
+//Intialize the wishlist or put it as an empty array
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
 //Get All HTML requirment elements
 var firstImg = document.getElementById('first__img')
@@ -261,7 +264,8 @@ function createCard(cardData) {
                 <button onclick="addToCart('${cardData.id}')">
                 ${isInBag ? "IN BAG" : "ADD TO CART"}
                 </button>
-                    <i class="fa-regular fa-heart" style="color: #323334; font-size: 20px;"></i>
+                <i id="heart-${cardData.id}" class="fa-regular fa-heart" style="color: #323334; font-size: 20px; cursor: pointer;"
+                onclick="addToWishlist('${cardData.id}')"></i>
                 </div>
             </div>
         </div>
@@ -332,4 +336,54 @@ var swiper = new Swiper(".slide-content", {
         },
     },
 });
+function isInWishlist(productId) {
+    return wishlist.some(item => item.id === productId);
+}
+
+//update heart icons based on the wishlist state
+function updateHeartIcons() {
+    cardItemsData.forEach(product => {
+        const heartIcon = document.getElementById(`heart-${product.id}`);
+        if (heartIcon) {
+            if (isInWishlist(product.id)) {
+                //product is in the wishlist == heart icon red
+                heartIcon.classList.remove("fa-regular");
+                heartIcon.classList.add("fa-solid");
+                heartIcon.style.color = "#DF1313";
+            } else {
+                //product is not in the wishlist == regular heart icon
+                heartIcon.classList.remove("fa-solid");
+                heartIcon.classList.add("fa-regular");
+                heartIcon.style.color = "#323334";
+            }
+        }
+    });
+}
+// Function to add or remove items from the wishlist
+function addToWishlist(productId) {
+    const isItemInWishlist = isInWishlist(productId);
+
+    if (isItemInWishlist) {
+        // Remove item from the wishlist
+        wishlist = wishlist.filter(item => item.id !== productId);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        updateHeartIcons(); // Update the heart icons after removing
+        alert("This item has been removed from your wishlist");
+    } else {
+        const productToAdd = cardItemsData.find(product => product.id === productId);
+
+        if (productToAdd) {
+            wishlist.push(productToAdd);
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            updateHeartIcons(); // Update the heart icons after adding
+            alert("This item has been added to your wishlist");
+        } else {
+            alert("Product not found.");
+        }
+    }
+    updateHeartIcons();
+
+}
+
+updateHeartIcons();
 
